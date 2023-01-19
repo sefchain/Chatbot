@@ -1,0 +1,16 @@
+.msg {
+  min-height: 50px;
+}
+.corps {
+  height: 300px;
+  overflow: auto;
+  padding-left: 5px;
+}
+audio {
+  width: 75%;
+  color: blue;
+  margin: 10px 10px 10px 10px;
+}
+body {
+  position: relative;
+}
