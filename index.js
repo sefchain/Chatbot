@@ -41,7 +41,11 @@
 let reponse = [
   [
     "bonjour",
-    "Bonjour choisissez une options suivante:tappez 1 si vous voulez entre de la musique douce, tappez 2 si vous voulez connaitre lactualité de la journée, tappez 3 si vous voulez avoir le lien d'un cours de jquery sur youtube, tappez 4 si vous voulez quittez",
+    `Bonjour choisissez une options suivante:<br>
+    tappez 1 si vous voulez entendre de la musique douce;<br>
+    tappez 2 si vous voulez connaitre l'actualité de la journée;<br>
+    tappez 3 si vous voulez avoir le lien d'un cours de jquery sur youtube;<br>
+    tappez 4 si vous voulez quittez.`,
   ],
   [
     "1",
@@ -61,20 +65,34 @@ let reponse = [
 ];
 $(document).ready(function () {
   $("button").click(function () {
-    $(".corps").append(`<div class='row mt-3 pe-2'> <div class="col-3"></div>
+    if ($("input").val()) {
+      $(".corps").append(`<div class='row mt-3 pe-2'> <div class="col-3"></div>
     <div class="col-9 msg rounded " style="background-color:burlywood">${$(
       "input"
     ).val()}</div><div>`);
-    [[, resp]] = [
-      ...reponse.filter((e) => e[0] === $("input").val().toLowerCase()),
-    ];
-    $("input").val("");
-    $("input").attr("placeholder", "entrer un message");
-    $(
-      ".corps"
-    ).append(`<div class="row mt-3 ps-2"><div class="col-9 rounded msg" style="background-color: aqua">${resp}</div>
+      console.log(undefined || "je suis la");
+      if (
+        reponse.filter((e) => e[0] === $("input").val().toLowerCase())
+          .length !== 0
+      ) {
+        [[, resp]] = reponse.filter(
+          (e) => e[0] === $("input").val().toLowerCase()
+        );
+      } else {
+        resp = "veillez saisir la bonne reponse";
+      }
+
+      setTimeout(() => {
+        $(".corps")
+          .append(`<div class="row mt-3 ps-2"><div class="col-9 rounded msg" style="background-color: aqua">${resp}</div>
     <div class="col-3"></div></div>`);
-    $(".corps").scrollTop(1000000);
+
+        $(".corps").scrollTop(1000000);
+      }, 500);
+      $("input").val("");
+      $("input").attr("placeholder", "entrer un message");
+      $(".corps").scrollTop(1000000);
+    }
   });
   $("i").click(function () {
     $("#chatbot").hide();
